@@ -1,0 +1,10 @@
+/server/package-lock.json
+/server/node_modules/
+/server/.idea
+/.idea
+/client/Library
+/client/Logs
+/client/.vsconfig
+/client/UserSettings
+*csproj
+Temp
