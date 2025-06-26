@@ -92,5 +92,10 @@ public class Player : MonoBehaviour
 
             Destroy(collision.gameObject);
         }
+
+        if (collision.CompareTag("Invader"))
+        {
+            GameController.Instance.GameOver();
+        }
     }
 }
