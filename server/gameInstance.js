@@ -136,10 +136,10 @@ module.exports = class GameInstance {
 
     // 4.2: Upon loss, win or timeout the client can ask the server to end the match. Server automatically ends the match after the time runs out anyway.
     this.apiRouter.post("/endmatch", (req, res) => {
-      this.endedMatches.find(
+      let endedMatch = this.endedMatches.find(
         (match) => match.player.nickname === req.body.username
       );
-      if (endedMatches !== undefined) {
+      if (endedMatch !== undefined) {
         res.status(200);
       }
       let match = this.matches.find(
