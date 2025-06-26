@@ -2,38 +2,24 @@ using UnityEngine;
 
 public class Invader : MonoBehaviour
 {
+    [SerializeField] private GameObject m_bulletPrefab;
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
+    [SerializeField] private float m_bulletSpeed;
+
     public float speed = 1f;
     public float moveDownDistance = 1f;
 
     private bool moveRight = true;
-    private static float lowestPosition = Mathf.Infinity;
+    private int health;
+    private InvaderTypeProperties m_invaderType;
 
-    private void Start()
+    public InvaderTypeProperties InvaderType => m_invaderType;
+
+    public void Init(InvaderTypeProperties invaderType)
     {
-        InvokeRepeating("Move", 1f, 1f);
-    }
-
-    private void Move()
-    {
-        Vector3 movement = moveRight ? Vector3.right : Vector3.left;
-        transform.Translate(movement * speed);
-
-        if (transform.position.y < lowestPosition)
-        {
-            lowestPosition = transform.position.y;
-        }
-
-        CheckScreenEdgeCollision();
-    }
-
-    private void CheckScreenEdgeCollision()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, moveDownDistance, LayerMask.GetMask("Default"));
-
-        if (hit.collider != null && hit.collider.CompareTag("ScreenEdge"))
-        {
-            GameController.Instance.InvaderHitEdge();
-        }
+        m_invaderType = invaderType;
+        health = invaderType.Health;
+        m_spriteRenderer.sprite = invaderType.Sprite;
     }
 
     public void ChangeDirection(bool newDirection)
@@ -46,8 +32,34 @@ public class Invader : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            health--;
+            if (health <= 0)
+            {
+                GameController.Instance.OnInvaderDeath(this);
+            }
             Destroy(collision.gameObject);
         }
+    }
+
+    public bool IsClearBulletPath()
+    {
+        var hits = Physics2D.RaycastAll(transform.position, Vector2.down, 100f);
+        foreach (var hit in hits)
+        {
+            if (hit.collider != null && hit.collider.CompareTag("Invader") && hit.collider.gameObject != gameObject)
+            {
+                return false; // Bullet path is blocked by another invader
+            }
+        }
+        return true;
+    }
+
+
+    // 2.2: Logic for invader shooting
+    public void Shoot()
+    {
+        GameObject bullet = Instantiate(m_bulletPrefab, transform.position, Quaternion.identity);
+        Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+        bulletRigidbody.velocity = Vector2.down * m_bulletSpeed;
     }
 }

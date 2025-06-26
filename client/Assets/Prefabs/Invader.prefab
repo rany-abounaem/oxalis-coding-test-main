@@ -146,5 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf6c5bdb995ddd44a2ffaf3ee961b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_bulletPrefab: {fileID: 33052392596605683, guid: b055ca409cf04cd44aacdd8cdef98c32, type: 3}
+  m_spriteRenderer: {fileID: 8922502034929116582}
+  m_bulletSpeed: 10
   speed: 1
-  deathEffect: {fileID: 0}
+  moveDownDistance: 1

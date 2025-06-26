@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a12e506b75a158e4ab53ac12252e42ba, type: 3}
+  m_Name: MultiMissile
+  m_EditorClassIdentifier: 
+  m_type: 1
+  m_pointsToUnlock: 200
+  m_grade: 2
+  m_bulletPrefab: {fileID: 33052392596605683, guid: 9293923c5fe79ea4c8fd34cb183c5b80, type: 3}
+  m_bulletSpeed: 20
+  m_bulletCooldown: 2

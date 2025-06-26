@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app" : "node index.js",
+    "app": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +14,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "http": "^0.0.1-security"
+    "http": "^0.0.1-security",
+    "nodemon": "^3.1.10",
+    "pidusage": "^4.0.1",
+    "ping": "^0.4.4"
   }
 }
